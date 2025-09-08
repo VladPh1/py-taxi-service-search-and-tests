@@ -146,7 +146,7 @@ class PrivateDriverTest(TestCase):
         )
         self.client.force_login(self.user)
 
-    def test_ctrate_driver(self):
+    def test_create_driver(self):
         form_data = {
             "username": "new_user",
             "password1": "user12test",

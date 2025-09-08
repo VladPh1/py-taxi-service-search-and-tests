@@ -84,7 +84,7 @@ class DriverSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Search by first name",
+                "placeholder": "Search by username",
             }
         )
     )

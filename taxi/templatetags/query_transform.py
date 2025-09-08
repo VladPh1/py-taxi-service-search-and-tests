@@ -1,5 +1,4 @@
 from django import template
-from django.contrib.auth.models import update_last_login
 
 register = template.Library()
 
