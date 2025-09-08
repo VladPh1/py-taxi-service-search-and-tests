@@ -113,13 +113,29 @@ class SearchResultsTest(TestCase):
         self.car1.drivers.add(self.driver1)
         self.car2.drivers.add(self.driver2)
 
-    def test_search_book(self):
+    def test_search_car(self):
         res = self.client.get(
             reverse("taxi:car-list"), {"model": "I8"}
         )
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, self.car1.model)
         self.assertNotContains(res, self.car2.model)
+
+    def test_search_manufacturer(self):
+        res = self.client.get(
+            reverse("taxi:manufacturer-list"), {"name": "Audi"}
+        )
+        self.assertEqual(res.status_code, 200)
+        self.assertContains(res, self.name1.name)
+        self.assertNotContains(res, self.name2.name)
+
+    def test_search_driver(self):
+        res = self.client.get(
+            reverse("taxi:driver-list"), {"username": "user1"}
+        )
+        self.assertEqual(res.status_code, 200)
+        self.assertContains(res, self.driver1.username)
+        self.assertNotContains(res, self.driver2.username)
 
 
 class PrivateDriverTest(TestCase):
@@ -130,7 +146,7 @@ class PrivateDriverTest(TestCase):
         )
         self.client.force_login(self.user)
 
-    def test_ctrate_author(self):
+    def test_ctrate_driver(self):
         form_data = {
             "username": "new_user",
             "password1": "user12test",
